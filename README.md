@@ -58,7 +58,7 @@ backend/app/planner/pathfinding.py   безопасный detour-граф вок
 backend/app/planner/exporters.py     GeoJSON/KML
 frontend/                            mission-control веб-прототип без сборки
 examples/demo_scenario.json          демонстрационный сценарий на 10 БВС
-docs/                                документация, презентация, демо-экспорты, QA-отчет
+docs/                                markdown-документация, демо-экспорты, QA-отчет
 tests/                               regression/QA tests
 ```
 
@@ -69,13 +69,20 @@ tests/                               regression/QA tests
 - `POST /api/export/geojson` — экспорт результата планирования.
 - `POST /api/export/kml` — экспорт результата планирования.
 
-## Что сдавать
+## Материалы для сдачи
 
-- Репозиторий: `https://github.com/marcellinotandy-lang/AeroMission-Planner-LCT2026`
-- Документация: `docs/AeroMission_Planner_Documentation.pdf` или `docs/documentation.md`
-- Презентация: `docs/AeroMission_Planner_Presentation.pdf` / `.pptx`
-- Прототип: локальный запуск из README, после запуска `http://localhost:8000`
-- Дополнительно: `docs/demo_plan_result.json`, `docs/demo_routes.geojson`, `docs/demo_routes.kml`, `docs/QA_REPORT.md`
+Актуальные DOCX/PDF/PPTX/ZIP-файлы лежат в папке Google Drive:
+
+https://drive.google.com/drive/folders/1N4fHkZ5UFOO86H7pKiWt5BcRGy-I6NFk
+
+Состав материалов:
+
+- `AeroMission_Planner_Submission_Pack.zip`
+- `AeroMission_Planner_Repository.zip`
+- `AeroMission_Planner_Documentation.docx`
+- `AeroMission_Planner_Documentation.pdf`
+- `AeroMission_Planner_Presentation.pptx`
+- `AeroMission_Planner_Presentation.pdf`
 
 ## Ограничения MVP
 
