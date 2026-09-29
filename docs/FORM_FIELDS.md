@@ -2,7 +2,7 @@
 
 Команда: #ЕСТЬТАЛАНТ
 
-Репозиторий: ссылка на GitHub-репозиторий после загрузки архива.
+Репозиторий: https://github.com/marcellinotandy-lang/AeroMission-Planner-LCT2026
 
 Документация: docs/AeroMission_Planner_Documentation.pdf
 
@@ -10,4 +10,4 @@
 
 Прототип: тот же репозиторий, запуск по README: `uvicorn backend.app.main:app --host 0.0.0.0 --port 8000`.
 
-Дополнительные материалы: docs/demo_routes.geojson, docs/demo_routes.kml, docs/llm_judge_review.md.
+Дополнительные материалы: docs/demo_plan_result.json, docs/demo_routes.geojson, docs/demo_routes.kml, docs/QA_REPORT.md.
