@@ -1,0 +1,5 @@
+services:
+  aeromission-planner:
+    build: .
+    ports:
+      - "8000:8000"
