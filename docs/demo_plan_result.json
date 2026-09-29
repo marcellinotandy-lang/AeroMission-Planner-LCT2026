@@ -1,0 +1,34 @@
+{
+  "scenario_name": "Демо: съемка промышленной зоны с ограничениями",
+  "summary": {
+    "optimization": "balanced",
+    "feasible": true,
+    "total_airtime_min": 77.12,
+    "makespan_min": 20.34,
+    "active_drones": 4,
+    "survey_area_ha": 353.1,
+    "coverage_strips": 28,
+    "warnings": []
+  },
+  "missions": [
+    {
+      "drone_id": "g201-1",
+      "model": "Геоскан 201",
+      "launch_point": "ВПП Север",
+      "landing_point": "Резерв 1",
+      "route": [
+        {"lon": 37.6178, "lat": 55.7605, "altitude_m": 0, "speed_mps": 13.9, "action": "takeoff"},
+        {"lon": 37.62085, "lat": 55.75473, "altitude_m": 120, "speed_mps": 13.9, "action": "survey"},
+        {"lon": 37.60704, "lat": 55.75473, "altitude_m": 120, "speed_mps": 13.9, "action": "survey"},
+        {"lon": 37.6126, "lat": 55.752, "altitude_m": 0, "speed_mps": 13.9, "action": "land"}
+      ],
+      "stages": ["Старт: ВПП Север", "Набор высоты", "Съемочный галс", "Посадка: Резерв 1"],
+      "distance_m": 16966.0,
+      "airtime_min": 20.34,
+      "survey_length_m": 7230.1,
+      "assigned_strips": 7,
+      "status": "planned"
+    }
+  ],
+  "exports": {"format": ["GeoJSON", "KML"]}
+}
