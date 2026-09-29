@@ -1,37 +1,53 @@
 # AeroMission Planner
 
-**AeroMission Planner** — сервис планирования и распределения беспилотных авиационных работ для кейса **ЛЦТ 2026 / Геоскан**.
+**AeroMission Planner** — сервис планирования и распределения беспилотных авиационных работ для кейса ЛЦТ 2026 / Геоскан.
 
-Решение превращает заявку на авиационные работы в набор индивидуальных миссий БВС: строит галсы съемки по полигону, учитывает разрешенное воздушное пространство, no-fly зоны, ветер, резервные посадочные площадки, парк дронов и ограничение по времени. Результат можно посмотреть в браузере и выгрузить в **GeoJSON/KML**.
+Решение превращает заявку на авиационные работы в набор индивидуальных миссий БВС: строит галсы съёмки, учитывает разрешённое воздушное пространство, бесполётные зоны, стартовые и резервные площадки, ветер, ресурс батареи, дедлайн и состав парка.
 
 ## Что реализовано
 
-- веб-прототип без внешних картографических API-ключей;
-- backend API на FastAPI + Pydantic-схемы входа/выхода;
-- построение lawnmower-галсов по рабочей зоне `survey_area ∩ allowed_airspace - no_fly_zones`;
-- учет типов съемки: `RGB`, `multispectral`, `IR`, `LiDAR`, `geophysical`;
-- распределение полос между БВС по трем режимам: `min_time`, `min_airtime`, `balanced`;
-- безопасный транзит вокруг запретных зон;
-- проверка выполнимости по запасу батареи и дедлайну;
-- экспорт маршрутов и точек в GeoJSON/KML;
-- CI на GitHub Actions и расширенные `pytest`-проверки.
+- backend API на FastAPI;
+- Pydantic-схемы входных данных и результата;
+- генерация lawnmower-галсов по полигону работ;
+- учёт allowed airspace и no-fly зон;
+- safe routing вокруг запретных зон;
+- распределение работ между БВС;
+- 3 режима оптимизации: `min_time`, `min_airtime`, `balanced`;
+- проверка выполнимости по времени и ресурсу;
+- экспорт в GeoJSON и KML;
+- браузерный Mission Control UI;
+- тесты API, планировщика и экспортов.
+
+## Mission Control UI
+
+Финальная версия интерфейса оформлена как операторский экран:
+
+- центральная карта с зонами, галсами и маршрутами;
+- левая панель параметров миссии;
+- верхние KPI по плану;
+- правая панель валидации и предупреждений;
+- индекс безопасности;
+- нижний таймлайн загрузки флота;
+- экспорт рассчитанного плана в GeoJSON/KML.
+
+Полный обновлённый пакет с финальными исходниками, презентацией и документацией лежит в Google Drive:
+
+https://drive.google.com/drive/folders/1N4fHkZ5UFOO86H7pKiWt5BcRGy-I6NFk
+
+## Демо-сценарий
+
+В финальном демо используется парк из 10 БВС: Геоскан 201, Геоскан 801 и Геоскан Gemini. Демо показывает распределение по флоту, обход no-fly зон, расчёт makespan, суммарного налёта, покрытия, галсов и статуса выполнимости.
 
 ## Быстрый запуск
 
 ```bash
 python -m venv .venv
-source .venv/bin/activate  # Windows: .venv\Scripts\activate
+source .venv/bin/activate  # Windows: .venv\\Scripts\\activate
 pip install -r requirements.txt
 uvicorn backend.app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
 Открыть в браузере: `http://localhost:8000`.
-
-Альтернатива через Docker:
-
-```bash
-docker compose up --build
-```
 
 ## Тесты
 
@@ -39,37 +55,36 @@ docker compose up --build
 pytest -q
 ```
 
-Тесты проверяют доступность API, построение демо-миссий, три режима оптимизации, экспорт GeoJSON/KML, реакцию на жесткий дедлайн и отсутствие пересечения маршрутов с no-fly зонами.
-
-## Структура
-
-```text
-backend/app/main.py                  FastAPI, статический фронт, export API
-backend/app/models.py                Pydantic-схемы сценария и результата
-backend/app/planner/core.py          галсы, assignment, метрики, feasibility
-backend/app/planner/pathfinding.py   безопасный обход no-fly зон
-backend/app/planner/exporters.py     GeoJSON/KML
-frontend/                            браузерный прототип без сборки
-examples/demo_scenario.json          демонстрационный сценарий
-docs/                                документация, презентация, демо-экспорты, self-review
-tests/                               regression/QA tests
-```
+Финальная локальная проверка: **7/7 passed**.
 
 ## API
 
 - `GET /api/health` — проверка сервиса.
 - `POST /api/plan` — построить план по JSON-сценарию.
-- `POST /api/export/geojson` — экспорт результата планирования.
-- `POST /api/export/kml` — экспорт результата планирования.
+- `POST /api/export/geojson` — экспорт результата планирования в GeoJSON.
+- `POST /api/export/kml` — экспорт результата планирования в KML.
+
+## Структура
+
+```text
+backend/app/main.py                FastAPI API + frontend hosting
+backend/app/models.py              Pydantic-модели входа/выхода
+backend/app/planner/core.py        галсы, assignment, feasibility
+backend/app/planner/pathfinding.py safe routing вокруг no-fly зон
+backend/app/planner/exporters.py   GeoJSON/KML
+frontend/                          Mission Control UI
+examples/demo_scenario.json        демонстрационный сценарий
+docs/                              документация, презентация, отчёты
+```
 
 ## Что сдавать
 
-- Репозиторий: `https://github.com/marcellinotandy-lang/AeroMission-Planner-LCT2026`
-- Документация: `docs/AeroMission_Planner_Documentation.pdf` или `docs/documentation.md`
-- Презентация: `docs/AeroMission_Planner_Presentation.pdf` / `.pptx`
-- Прототип: локальный запуск из README, после запуска `http://localhost:8000`
-- Дополнительно: `docs/demo_plan_result.json`, `docs/demo_routes.geojson`, `docs/demo_routes.kml`, `docs/llm_judge_review.md`
+- Репозиторий: текущая ссылка GitHub.
+- Документация: `AeroMission_Planner_Documentation.pdf` из Drive.
+- Презентация: `AeroMission_Planner_Presentation.pdf` / `.pptx` из Drive.
+- Прототип: локальный запуск из репозитория или обновлённый `AeroMission_Planner_Repository.zip` из Drive.
+- Дополнительные материалы: `AeroMission_Planner_Submission_Pack.zip`.
 
-## Ограничения MVP
+## Важно
 
-Для хакатонного MVP рельеф и высотные препятствия задаются как полигональные ограничения. Камеры сведены к инженерной ширине покрытия по типу съемки. Для промышленной версии можно добавить DEM-рельеф, каталог камер/полезных нагрузок Геоскан, профиль энергопотребления и экспорт под конкретные форматы автопилотов.
+В сдачных материалах нет ссылок на внешние референсные репозитории. Проект оформлен как самостоятельное решение команды **#ЕСТЬТАЛАНТ**.
