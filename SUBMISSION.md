@@ -2,33 +2,15 @@
 
 Команда: `#ЕСТЬТАЛАНТ`
 
-## Что сдавать в поля формы
+## Поля формы
 
-- Репозиторий: ссылка на GitHub-репозиторий с содержимым этого архива.
-- Документация: можно указать ссылку на `docs/AeroMission_Planner_Documentation.pdf` или на README репозитория.
-- Презентация: можно указать ссылку на `docs/AeroMission_Planner_Presentation.pdf` / `.pptx`.
-- Прототип: ссылка на репозиторий или на инструкцию запуска в README. Прототип запускается локально через FastAPI и открывается в браузере.
-- Дополнительные материалы: `docs/demo_plan_result.json`, `docs/demo_routes.geojson`, `docs/demo_routes.kml`, `docs/llm_judge_review.md`.
+- **Репозиторий:** https://github.com/marcellinotandy-lang/AeroMission-Planner-LCT2026
+- **Документация:** `docs/AeroMission_Planner_Documentation.pdf` или `docs/documentation.md`
+- **Презентация:** `docs/AeroMission_Planner_Presentation.pdf` / `docs/AeroMission_Planner_Presentation.pptx`
+- **Прототип:** локальный FastAPI-прототип из репозитория, после запуска открыть `http://localhost:8000`
+- **Дополнительные материалы:** `docs/demo_plan_result.json`, `docs/demo_routes.geojson`, `docs/demo_routes.kml`, `docs/QA_REPORT.md`
 
-## Быстрый push на GitHub
-
-```bash
-cd aeromission-planner
-git init
-git add .
-git commit -m "Initial hackathon submission"
-git branch -M main
-git remote add origin https://github.com/<USER>/<REPO>.git
-git push -u origin main
-```
-
-Если используешь GitHub CLI:
-
-```bash
-gh repo create <USER>/<REPO> --public --source . --remote origin --push
-```
-
-## Проверка перед сдачей
+## Проверка перед отправкой
 
 ```bash
 python -m venv .venv
@@ -39,3 +21,7 @@ uvicorn backend.app.main:app --host 0.0.0.0 --port 8000
 ```
 
 Открыть: http://localhost:8000
+
+## Короткое описание для комментария к сдаче
+
+AeroMission Planner — веб-сервис для планирования и распределения беспилотных авиационных работ. Сервис строит галсы съемки, учитывает воздушные ограничения и no-fly зоны, распределяет работу между БВС по времени/налету/балансу, проверяет выполнимость и экспортирует индивидуальные миссии в GeoJSON/KML.
