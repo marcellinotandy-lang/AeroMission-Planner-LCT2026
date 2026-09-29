@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AeroMission Planner</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="brand">
+      <div class="logo">AP</div>
+      <div>
+        <h1>AeroMission Planner</h1>
+        <div class="subtitle">Веб-сервис планирования и распределения беспилотных авиационных работ: зоны, ограничения, парк БВС, ветер, оптимизация и экспорт миссий.</div>
+      </div>
+    </div>
+    <div class="status"><span class="dot"></span>API online · KML / GeoJSON</div>
+  </header>
+  <main class="layout">
+    <section class="panel controls">
+      <div class="row">
+        <div><label>Критерий оптимизации</label><select id="optimization"><option value="min_time">Минимум времени</option><option value="min_airtime">Минимум налета</option><option value="balanced">Баланс</option></select></div>
+        <div><label>Тип съемки</label><select id="surveyType"><option>RGB</option><option value="multispectral">multispectral</option><option>IR</option><option>LiDAR</option><option value="geophysical">geophysical</option></select></div>
+      </div>
+      <label>Скорость ветра, м/с</label><input id="wind" type="number" min="0" step="0.5" value="6" />
+      <label>Сценарий миссии JSON</label><textarea id="jsonInput"></textarea>
+      <button onclick="runPlan()">Рассчитать план полётов</button>
+      <div class="row"><button class="secondary" onclick="download('geojson')">Скачать GeoJSON</button><button class="secondary" onclick="download('kml')">Скачать KML</button></div>
+    </section>
+    <section class="panel mapPanel">
+      <div class="toolbar"><span class="badge">фиолетовый — зона съемки</span><span class="badge">розовый — бесполетные зоны</span><span class="badge">бирюзовый — маршруты</span></div>
+      <canvas id="mapCanvas"></canvas>
+      <div class="results" id="results"></div>
+      <div class="missions" id="missions"></div>
+    </section>
+  </main>
+  <script src="/static/app.js"></script>
+</body>
+</html>
