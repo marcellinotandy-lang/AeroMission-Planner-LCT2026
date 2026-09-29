@@ -1,0 +1,47 @@
+:root {
+  --bg: #080a18;
+  --panel: rgba(20, 25, 48, 0.82);
+  --line: rgba(255,255,255,.12);
+  --text: #f6f7ff;
+  --muted: #a9afd1;
+  --accent: #00e0b8;
+  --pink: #ff0053;
+  --violet: #8a83d1;
+  --yellow: #ffd166;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Inter, Montserrat, system-ui, -apple-system, Segoe UI, sans-serif;
+  background: radial-gradient(circle at 80% 10%, rgba(0,224,184,.24), transparent 30%), radial-gradient(circle at 20% 10%, rgba(255,0,83,.19), transparent 28%), var(--bg);
+  color: var(--text);
+}
+.header { padding: 28px 32px 18px; display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; }
+.brand { display: flex; gap: 14px; align-items: center; }
+.logo { width: 46px; height: 46px; border-radius: 15px; background: linear-gradient(135deg, var(--accent), var(--pink)); display: grid; place-items: center; color: #07131b; font-weight: 900; letter-spacing: -1px; }
+h1 { margin: 0; font-size: 34px; line-height: 1.05; letter-spacing: -1.2px; }
+.subtitle { color: var(--muted); margin-top: 8px; max-width: 740px; }
+.status { display: flex; gap: 8px; align-items: center; color: var(--muted); font-size: 14px; }
+.dot { width: 10px; height: 10px; border-radius: 99px; background: var(--accent); box-shadow: 0 0 14px var(--accent); }
+.layout { padding: 0 32px 32px; display: grid; grid-template-columns: 430px minmax(0, 1fr); gap: 20px; }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 24px; box-shadow: 0 18px 60px rgba(0,0,0,.28); backdrop-filter: blur(14px); }
+.controls { padding: 18px; }
+label { display: block; color: var(--muted); font-size: 13px; margin: 12px 0 6px; }
+select, input, textarea, button { width: 100%; border: 1px solid var(--line); border-radius: 14px; background: rgba(255,255,255,.06); color: var(--text); padding: 12px 14px; font: inherit; }
+textarea { min-height: 340px; resize: vertical; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; }
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+button { cursor: pointer; font-weight: 800; background: linear-gradient(135deg, var(--accent), #00a6ff); color: #05121a; border: 0; margin-top: 12px; }
+button.secondary { background: rgba(255,255,255,.08); color: var(--text); border: 1px solid var(--line); }
+.mapPanel { overflow: hidden; position: relative; min-height: 660px; }
+.toolbar { position: absolute; z-index: 2; top: 16px; left: 16px; display: flex; gap: 8px; flex-wrap: wrap; max-width: 70%; }
+.badge { background: rgba(8,10,24,.72); border: 1px solid var(--line); border-radius: 999px; padding: 9px 12px; font-size: 13px; color: var(--muted); }
+#mapCanvas { width: 100%; height: 660px; display: block; background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.015)); }
+.results { padding: 18px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.metric { padding: 16px; background: rgba(255,255,255,.06); border: 1px solid var(--line); border-radius: 18px; }
+.metric b { display:block; font-size: 26px; letter-spacing: -1px; }
+.metric span { color: var(--muted); font-size: 13px; }
+.missions { padding: 0 18px 18px; display: grid; gap: 10px; }
+.card { border: 1px solid var(--line); background: rgba(255,255,255,.055); border-radius: 18px; padding: 14px; display: flex; justify-content: space-between; gap: 12px; }
+.card small { color: var(--muted); display: block; margin-top: 3px; }
+.warning { color: var(--yellow); font-size: 13px; margin-top: 8px; }
+@media (max-width: 1000px) { .layout { grid-template-columns: 1fr; } .results { grid-template-columns: repeat(2, 1fr); } }
