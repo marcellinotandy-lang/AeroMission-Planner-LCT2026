@@ -1,0 +1,1 @@
+{"type":"FeatureCollection","features":[{"type":"Feature","properties":{"drone_id":"g201-1","model":"Геоскан 201"},"geometry":{"type":"LineString","coordinates":[[37.6178,55.7605,0],[37.62085,55.75473,120],[37.60704,55.75473,120],[37.6126,55.752,0]]}}]}
